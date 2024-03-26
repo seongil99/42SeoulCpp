@@ -1,0 +1,8 @@
+*
+!cpp*/
+!cpp*/ex*/
+!cpp*/ex*/*.cpp
+!cpp*/ex*/*.hpp
+!cpp*/ex*/Makefile
+!.gitignore
+!README.md
