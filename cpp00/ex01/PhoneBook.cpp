@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 14:14:08 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/24 19:25:12 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:40:44 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	PhoneBook::add(void)
 	{
 		this->contact[this->idx].clear();
 		std::cerr << "  Contact not saved" << std::endl;
+		return;
 	}
 	this->idx = (this->idx + 1) % 8;
 }
@@ -52,7 +53,7 @@ void	PhoneBook::search(void)
 		std::cout << std::endl;
 		return;
 	}
-	if (!is_all_digit(input))
+	if (!input.size() || !is_all_digit(input))
 	{
 		std::cerr << "  Wrong index" << std::endl;
 		return;
