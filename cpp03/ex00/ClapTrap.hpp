@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:47:03 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/23 19:39:40 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:05:17 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ private:
 	long long	hitPoints;
 	long long	engergyPoints;
 	long long	attackDamage;
-	void		_printNoEnergyPoints(void);
-	void		_printNoHitPoints(void);
+	void		_printNoEnergyPoints(void) const;
+	void		_printNoHitPoints(void) const;
 
 public:
 	ClapTrap(void);

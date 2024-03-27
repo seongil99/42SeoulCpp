@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:50:17 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/27 20:02:37 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:05:22 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,14 +143,14 @@ int	ClapTrap::getAttackDamage(void) const
 	return this->attackDamage;
 }
 
-void	ClapTrap::_printNoEnergyPoints(void)
+void	ClapTrap::_printNoEnergyPoints(void) const
 {
 	std::cout << "ClapTrap "
 		<< this->name
 		<< " doesn't have energy points." << std::endl;
 }
 
-void	ClapTrap::_printNoHitPoints(void)
+void	ClapTrap::_printNoHitPoints(void) const
 {
 	std::cout << "ClapTrap "
 		<< this->name
