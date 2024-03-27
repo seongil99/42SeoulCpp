@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 12:35:26 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/17 14:15:40 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 12:44:50 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	Account::getNbWithdrawals(void)
 void	Account::displayAccountsInfos(void)
 {
 	_displayTimestamp();
-	std::cout << " accounts:" << _nbAccounts + 1
+	std::cout << " accounts:" << _nbAccounts
 		<< ";total:" << _totalAmount
 		<< ";deposits:" << _totalNbDeposits
 		<< ";withdrawals:" << _totalNbWithdrawals
