@@ -6,12 +6,14 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 14:37:06 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/17 15:58:42 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 14:47:11 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Zombie.hpp"
+
+Zombie::Zombie(void) {}
 
 Zombie::Zombie(std::string name)
 {
@@ -27,4 +29,9 @@ Zombie::~Zombie(void)
 void	Zombie::announce(void)
 {
 	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void	Zombie::setName(std::string name)
+{
+	this->_name = name;
 }
