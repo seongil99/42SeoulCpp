@@ -6,12 +6,11 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:04:21 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/20 19:20:02 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 17:31:22 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmath>
-#include <iostream>
 #include "Fixed.hpp"
 
 Fixed::Fixed(void)
