@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 18:50:17 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/24 16:40:39 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/27 20:02:37 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ ClapTrap::ClapTrap(void)
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "ClapTrap(std::string name) constructor called." << std::endl;
+	std::cout << "String constructor called." << std::endl;
 	this->name = name;
 	this->hitPoints = 10;
 	this->engergyPoints = 10;
