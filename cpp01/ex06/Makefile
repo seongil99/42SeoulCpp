@@ -1,5 +1,5 @@
-CC				= c++
-CFLAGS			= -Wall -Wextra -Werror -std=c++98
+CXX				= c++
+CXXFLAGS			= -Wall -Wextra -Werror -std=c++98
 
 NAME			= harlFilter
 
@@ -11,10 +11,10 @@ INCLUDES		= Harl.hpp
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
 
 $(OBJS): $(INCLUDES)
 

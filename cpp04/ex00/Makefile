@@ -21,12 +21,12 @@ INCLUDES	= Animal.hpp \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJS): $(INCLUDES)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

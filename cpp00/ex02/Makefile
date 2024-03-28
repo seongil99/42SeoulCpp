@@ -1,20 +1,20 @@
 CXX				= c++
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-NAME			= account_test
+NAME			= aCXXount_test
 
 SRCS			= tests.cpp \
-				Account.cpp
+				ACXXount.cpp
 OBJS			= $(SRCS:.cpp=.o)
-INCLUDES		= Account.hpp
+INCLUDES		= ACXXount.hpp
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
 
 $(OBJS): $(INCLUDES)
 

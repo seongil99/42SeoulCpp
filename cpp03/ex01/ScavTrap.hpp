@@ -6,7 +6,11 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:11:30 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/27 20:11:31 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/28 00:11:12 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef __SCAVTRAP_HPP__
+#define __SCAVTRAP_HPP__
+
+#endif

@@ -1,5 +1,5 @@
-CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CXX			= c++
+CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 NAME		= polymorphism
 
@@ -23,12 +23,12 @@ INCLUDES	= Animal.hpp \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJS): $(INCLUDES)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -13,10 +13,10 @@ INCLUDES		= Contact.hpp \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I. -c $< -o $@
 
 $(OBJS): $(INCLUDES)
 
