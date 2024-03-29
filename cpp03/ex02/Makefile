@@ -1,14 +1,16 @@
 CXX				= c++
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-NAME			= scavTrap
+NAME			= fragTrap
 
 SRCS			= main.cpp \
 				ClapTrap.cpp \
-				ScavTrap.cpp 
+				ScavTrap.cpp \
+				FragTrap.cpp
 OBJS			= $(SRCS:.cpp=.o)
 INCLUDES		= ClapTrap.hpp \
-				ScavTrap.hpp
+				ScavTrap.hpp \
+				FragTrap.hpp
 
 all: $(NAME)
 

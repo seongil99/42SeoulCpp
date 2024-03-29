@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:11:27 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/29 12:12:10 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/29 12:11:18 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void ScavTrap::attack(const std::string &target) {
               << std::endl;
 }
 
-void ScavTrap::guardGate(void) {
+void ScavTrap::guardGate(void) const {
     if (this->engergyPoints <= 0) {
         _printNoEnergyPoints();
         return;

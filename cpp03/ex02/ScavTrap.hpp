@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 18:50:09 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/28 17:09:18 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/03/27 20:11:30 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/03/29 11:12:11 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef __SCAVTRAP_HPP__
+#define __SCAVTRAP_HPP__
 
-#include "ScavTrap.hpp"
+#include <string>
 
-int main(void) {
-    ClapTrap clapTrap1("CT1");
-    ScavTrap scavTrap1("ST1");
-    std::cout << std::endl;
+#include "ClapTrap.hpp"
 
-    scavTrap1.attack("CT1");
-    clapTrap1.takeDamage(scavTrap1.getAttackDamage());
-    std::cout << std::endl;
+class ScavTrap : public ClapTrap {
+   public:
+    ScavTrap(void);
+    ScavTrap(std::string name);
+    ScavTrap(const ScavTrap &ref);
+    ~ScavTrap(void);
 
-    clapTrap1.beRepaired(10);
-    scavTrap1.guardGate();
-    std::cout << std::endl;
+    ScavTrap &operator=(const ScavTrap &ref);
 
-    return 0;
-}
+    void attack(const std::string &target);
+    void guardGate(void) const;
+};
+
+#endif
