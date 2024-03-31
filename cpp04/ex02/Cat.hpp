@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:25:53 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/26 00:31:43 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/29 14:28:41 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class Cat : public Animal
-{
-private:
-	Brain *brain;
+class Cat : public Animal {
+   private:
+    Brain *brain;
 
-public:
-	Cat(void);
-	Cat(const Cat &ref);
-	~Cat(void);
-	Cat &operator=(const Cat &ref);
-	void makeSound(void) const;
-	Brain *getBrain(void) const;
+   public:
+    Cat(void);
+    Cat(const Cat &ref);
+    ~Cat(void);
+
+    Cat &operator=(const Cat &ref);
+
+    void makeSound(void) const;
+    Brain *getBrain(void) const;
 };
 
 #endif

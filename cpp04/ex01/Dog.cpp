@@ -6,47 +6,42 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 17:25:56 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/03/26 00:31:31 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/03/29 15:38:15 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Dog.hpp"
 
-Dog::Dog(void)
-{
-	type = "Dog";
-	brain = new Brain();
-	std::cout << "Dog constructor called" << std::endl;
+#include <iostream>
+
+Dog::Dog(void) {
+    std::cout << "Dog constructor called" << std::endl;
+    type = "Dog";
+    brain = new Brain();
+    if (!brain) {
+        std::cerr << "Memory allocation failed" << std::endl;
+        std::exit(1);
+    }
 }
 
-Dog::Dog(const Dog &other)
-{
-	*this = other;
+Dog::Dog(const Dog &other) {
+    std::cout << "Dog copy constructor called" << std::endl;
+    *this = other;
 }
 
-Dog::~Dog(void)
-{
-	if (this->brain)
-		delete this->brain;
-	std::cout << "Dog destructor called" << std::endl;
+Dog::~Dog(void) {
+    std::cout << "Dog destructor called" << std::endl;
+    delete brain;
 }
 
-Dog &Dog::operator=(const Dog &other)
-{
-	this->type = other.type;
-	if (this->brain)
-		delete this->brain;
-	this->brain = new Brain(*other.brain);
-	return (*this);
+Dog &Dog::operator=(const Dog &other) {
+    std::cout << "Dog operator= called" << std::endl;
+    if (this == &other) return (*this);
+    this->type = other.type;
+    this->brain = new Brain(*other.brain);
+    return (*this);
 }
 
-void Dog::makeSound(void) const
-{
-	std::cout << "Woof Woof" << std::endl;
-}
+void Dog::makeSound(void) const { std::cout << "Woof Woof" << std::endl; }
 
-Brain *Dog::getBrain(void) const
-{
-	return (this->brain);
-}
+Brain *Dog::getBrain(void) const { return (this->brain); }
