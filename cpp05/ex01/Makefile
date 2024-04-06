@@ -4,7 +4,8 @@ CXXFLAGS		= -Wall -Wextra -Werror -MMD -MP -std=c++98
 NAME			= exceptions
 
 SRCS			= main.cpp \
-					Bureaucrat.cpp
+					Bureaucrat.cpp \
+					Form.cpp
 
 OBJS			= $(SRCS:.cpp=.o)
 
