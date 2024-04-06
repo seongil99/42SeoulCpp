@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form(void) : name("default"), toSign(150), toExec(150) {}
+AForm::AForm(void) : name("default"), toSign(150), toExec(150) {}
 
-Form::Form(const std::string &name, const unsigned int toSign,
-           const unsigned int toExec)
+AForm::AForm(const std::string &name, const unsigned int toSign,
+             const unsigned int toExec)
     : name(name), toSign(toSign), toExec(toExec) {
     isSigned = false;
 }
 
-Form::Form(const Form &ref)
+AForm::AForm(const AForm &ref)
     : name(ref.name), toSign(ref.toSign), toExec(ref.toExec) {
     isSigned = false;
 }
 
-Form::~Form(void) {}
+AForm::~AForm(void) {}
 
-Form &Form::operator=(const Form &ref) { this->isSigned = ref.isSigned; }
+AForm &AForm::operator=(const AForm &ref) { this->isSigned = ref.isSigned; }
 
-const char *Form::GradeTooHighException::what() const throw() {
+const char *AForm::GradeTooHighException::what() const throw() {
     return ("Grade is too high");
 }
 
-const char *Form::GradeTooLowException::what() const throw() {
+const char *AForm::GradeTooLowException::what() const throw() {
     return ("Grade is too low");
 }

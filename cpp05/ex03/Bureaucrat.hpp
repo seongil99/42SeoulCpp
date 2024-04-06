@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/05 15:30:23 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/06 19:03:03 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/03 22:00:00 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/06 19:21:05 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
 
 #include <string>
 
-#include "Bureaucrat.hpp"
-
-class Form {
+class Bureaucrat {
   private:
     const std::string name;
-    bool isSigned;
-    const unsigned int toSign;
-    const unsigned int toExec;
+    unsigned int grade;
 
   public:
-    Form(void);
-    Form(const std::string &name, const unsigned int toSign,
-         const unsigned int toExec);
-    Form(const Form &ref);
-    ~Form(void);
+    Bureaucrat(void);
+    Bureaucrat(const std::string &name, unsigned int grade);
+    Bureaucrat(const Bureaucrat &ref);
+    ~Bureaucrat(void);
 
-    Form &operator=(const Form &ref);
+    Bureaucrat &operator=(const Bureaucrat &ref);
+
+    const std::string &getName(void) const;
+    unsigned int getGrade(void) const;
+
+    void incrementGrade(unsigned int value);
+    void decrementGrade(unsigned int value);
+
+    void executeForm(AForm const &form);
 
     class GradeTooHighException : public std::exception {
       public:
@@ -44,6 +47,6 @@ class Form {
     };
 };
 
-std::ostream &operator<<(std::ostream &os, const Form &form);
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);
 
 #endif
