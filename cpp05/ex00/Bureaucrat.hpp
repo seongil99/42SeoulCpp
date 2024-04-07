@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:00:00 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/05 15:23:56 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/07 12:56:17 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include <string>
 
 class Bureaucrat {
-  private:
+   private:
     const std::string name;
     unsigned int grade;
 
-  public:
+   public:
     Bureaucrat(void);
     Bureaucrat(const std::string &name, unsigned int grade);
     Bureaucrat(const Bureaucrat &ref);
@@ -35,12 +35,12 @@ class Bureaucrat {
     void decrementGrade(unsigned int value);
 
     class GradeTooHighException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 };

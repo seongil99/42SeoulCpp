@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:30:23 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/06 19:03:03 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/06 22:22:01 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 #include "Bureaucrat.hpp"
 
 class Form {
-  private:
+   private:
     const std::string name;
     bool isSigned;
     const unsigned int toSign;
     const unsigned int toExec;
 
-  public:
+   public:
     Form(void);
     Form(const std::string &name, const unsigned int toSign,
          const unsigned int toExec);
@@ -33,13 +33,20 @@ class Form {
 
     Form &operator=(const Form &ref);
 
+    const std::string &getName(void) const;
+    bool getIsSigned(void) const;
+    unsigned int getToSign(void) const;
+    unsigned int getToExec(void) const;
+
+    void beSigned(const Bureaucrat &bureaucrat);
+
     class GradeTooHighException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 };

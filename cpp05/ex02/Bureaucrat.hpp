@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:00:00 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/06 19:21:05 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/07 21:34:54 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 #include <string>
 
+class AForm;
+
 class Bureaucrat {
-  private:
+   private:
     const std::string name;
     unsigned int grade;
 
-  public:
+   public:
     Bureaucrat(void);
     Bureaucrat(const std::string &name, unsigned int grade);
     Bureaucrat(const Bureaucrat &ref);
@@ -34,15 +36,16 @@ class Bureaucrat {
     void incrementGrade(unsigned int value);
     void decrementGrade(unsigned int value);
 
+    void signForm(AForm &form);
     void executeForm(AForm const &form);
 
     class GradeTooHighException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 };
