@@ -1,11 +1,10 @@
 CXX				= c++
 CXXFLAGS		= -Wall -Wextra -Werror -MMD -MP -std=c++98
 
-NAME			= casts
+NAME			= cast
 
 SRCS			= main.cpp \
-					Bureaucrat.cpp \
-					Form.cpp
+					Serializer.cpp \
 
 OBJS			= $(SRCS:.cpp=.o)
 

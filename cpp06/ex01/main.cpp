@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 19:47:41 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:24 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/08 17:53:06 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/08 20:46:15 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
+#include <iostream>
 
-#include <string>
+#include "Serializer.hpp"
 
-class Converter {
-   private:
-    Converter(void);
-    Converter(const Converter &ref);
-    Converter &operator=(const Converter &ref);
-    ~Converter(void);
+int main(void) {
+    Data *data = new Data;
+    data->str = "Hello";
+    data->num = 42;
 
-   public:
-    static void convert(const std::string &input);
-};
+    uintptr_t raw = Serializer::serialize(data);
+    Data *newData = Serializer::deserialize(raw);
 
-#endif
+    std::cout << "Data: " << newData->str << " " << newData->num << std::endl;
+
+    delete data;
+
+    return 0;
+}

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 19:47:41 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:24 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/08 17:55:45 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/08 18:13:29 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
+#ifndef DATA_HPP
+#define DATA_HPP
 
 #include <string>
 
-class Converter {
-   private:
-    Converter(void);
-    Converter(const Converter &ref);
-    Converter &operator=(const Converter &ref);
-    ~Converter(void);
-
-   public:
-    static void convert(const std::string &input);
+struct Data {
+    std::string str;
+    int num;
 };
 
 #endif

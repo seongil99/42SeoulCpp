@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 19:47:41 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/08 15:51:24 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/08 17:52:43 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/08 17:55:39 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
+#ifndef SERIALIZER_HPP
+#define SERIALIZER_HPP
 
 #include <string>
 
-class Converter {
+#include "Data.hpp"
+
+class Serializer {
    private:
-    Converter(void);
-    Converter(const Converter &ref);
-    Converter &operator=(const Converter &ref);
-    ~Converter(void);
+    Serializer(void);
+    Serializer(const Serializer &ref);
+    Serializer &operator=(const Serializer &ref);
+    ~Serializer(void);
 
    public:
-    static void convert(const std::string &input);
+    static uintptr_t serialize(Data *ptr);
+    static Data *deserialize(uintptr_t raw);
 };
 
 #endif
