@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 19:47:41 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/15 14:48:20 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/15 15:33:08 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/15 17:51:55 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
+#ifndef ITER_HPP
+#define ITER_HPP
 
-#include <string>
+#include <cstddef>
 
-class Converter {
-   private:
-    Converter(void);
-    Converter(const Converter &ref);
-    Converter &operator=(const Converter &ref);
-    ~Converter(void);
+template <typename T>
+void iter(T *arr, size_t len, void (*func)(T const &)) {
+    if (!arr || !func) {
+        return;
+    }
+    for (size_t i = 0; i < len; i++) {
+        func(arr[i]);
+    }
+}
 
-   public:
-    static void convert(const std::string &input);
-};
+template <typename T>
+void print(T const &elem) {
+    std::cout << elem << ' ';
+}
 
 #endif

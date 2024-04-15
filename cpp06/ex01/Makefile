@@ -1,7 +1,7 @@
 CXX				= c++
 CXXFLAGS		= -Wall -Wextra -Werror -MMD -MP -std=c++98
 
-NAME			= cast
+NAME			= casts
 
 SRCS			= main.cpp \
 					Serializer.cpp \

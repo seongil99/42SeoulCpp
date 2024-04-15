@@ -3,6 +3,7 @@
 !cpp*/ex*/
 !cpp*/ex*/*.cpp
 !cpp*/ex*/*.hpp
+!cpp*/ex*/*.tpp
 !cpp*/ex*/Makefile
 !.gitignore
 !README.md

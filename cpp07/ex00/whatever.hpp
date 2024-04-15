@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Converter.hpp                                      :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/06 19:47:41 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/15 14:48:20 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/15 15:18:50 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/15 17:52:21 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERTER_HPP
-#define CONVERTER_HPP
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
 
-#include <string>
+template <typename T>
+void swap(T &a, T &b) {
+    T tmp = a;
+    a = b;
+    b = tmp;
+}
 
-class Converter {
-   private:
-    Converter(void);
-    Converter(const Converter &ref);
-    Converter &operator=(const Converter &ref);
-    ~Converter(void);
+template <typename T>
+T min(T a, T b) {
+    return (a < b) ? a : b;
+}
 
-   public:
-    static void convert(const std::string &input);
-};
+template <typename T>
+T max(T a, T b) {
+    return (a > b) ? a : b;
+}
 
 #endif
