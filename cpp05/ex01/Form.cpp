@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 15:30:15 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 12:54:54 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:10:18 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ Form::Form(void) : name("default"), toSign(150), toExec(150) {}
 Form::Form(const std::string &name, const unsigned int toSign,
            const unsigned int toExec)
     : name(name), toSign(toSign), toExec(toExec) {
+    if (toSign < 1 || toExec < 1)
+        throw Form::GradeTooHighException();
+    if (toSign > 150 || toExec > 150)
+        throw Form::GradeTooLowException();
     isSigned = false;
 }
 
@@ -29,7 +33,10 @@ Form::Form(const Form &ref)
 
 Form::~Form(void) {}
 
-Form &Form::operator=(const Form &ref) { return (*this); }
+Form &Form::operator=(const Form &ref) {
+    (void)ref;
+    return (*this);
+}
 
 const std::string &Form::getName(void) const { return (this->name); }
 
