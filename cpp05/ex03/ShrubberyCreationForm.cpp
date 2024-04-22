@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:25 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 22:24:38 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:46:18 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ref)
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {}
 
-ShrubberyCreationForm &ShrubberyCreationForm::operator=(
-    const ShrubberyCreationForm &ref) {
+ShrubberyCreationForm &
+ShrubberyCreationForm::operator=(const ShrubberyCreationForm &ref) {
     (void)ref;
     return (*this);
 }
 
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-    if (executor.getGrade() > this->getToExec()) throw GradeTooLowException();
-    if (!this->getIsSigned()) throw FormNotSignedException();
-    std::ofstream file(this->target + "_shrubbery");
+    if (executor.getGrade() > this->getToExec())
+        throw GradeTooLowException();
+    if (!this->getIsSigned())
+        throw FormNotSignedException();
+    std::string suffix = "_shrubbery";
+    std::string filename = this->target + suffix;
+    std::ofstream file(filename.c_str());
     if (!file.is_open()) {
         std::cerr << "Failed to open file" << std::endl;
         return;

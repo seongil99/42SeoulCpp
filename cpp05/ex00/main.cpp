@@ -6,10 +6,11 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 21:59:57 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/06 17:18:11 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/22 16:39:15 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <climits>
 #include <iostream>
 
 #include "Bureaucrat.hpp"
