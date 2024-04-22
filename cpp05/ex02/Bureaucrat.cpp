@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:00:04 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 22:23:33 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:04:59 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,13 @@ void Bureaucrat::decrementGrade(unsigned int value) {
 }
 
 void Bureaucrat::signForm(AForm &form) {
-    try {
-        form.beSigned(*this);
-        std::cout << this->name << " signed " << form.getName() << std::endl;
-    } catch (std::exception &e) {
-        std::cout << this->name << " couldn't sign " << form.getName()
-                  << " because " << e.what() << std::endl;
-    }
+    form.beSigned(*this);
+    std::cout << this->name << " signed " << form.getName() << std::endl;
 }
 
 void Bureaucrat::executeForm(AForm const &form) {
-    try {
-        form.execute(*this);
-        std::cout << this->name << " executed " << form.getName() << std::endl;
-    } catch (std::exception &e) {
-        std::cout << this->name << " couldn't execute " << form.getName()
-                  << " because " << e.what() << std::endl;
-    }
+    form.execute(*this);
+    std::cout << this->name << " executed " << form.getName() << std::endl;
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw() {

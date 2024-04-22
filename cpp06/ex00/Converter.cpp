@@ -6,12 +6,13 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:47:51 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/08 17:51:42 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:14:11 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Converter.hpp"
 
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 #include <limits>

@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 21:59:57 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 22:26:40 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 00:06:19 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,45 @@ int main(void) {
     std::cout << f3 << std::endl;
     std::cout << std::endl;
 
-    b3.signForm(f1);
-    b3.signForm(f2);
-    b3.signForm(f3);
+    try {
+        b3.signForm(f1);
+        b3.signForm(f2);
+        b3.signForm(f3);
+    } catch (std::exception &e) {
+        std::cout << "cannot sign form" << std::endl;
+        std::cout << e.what() << std::endl;
+    }
     std::cout << f1 << std::endl;
     std::cout << f2 << std::endl;
     std::cout << f3 << std::endl;
     std::cout << std::endl;
 
-    b2.executeForm(f1);
-    b2.executeForm(f2);
-    b2.executeForm(f3);
+    try {
+        b2.executeForm(f1);
+        b2.executeForm(f2);
+        b2.executeForm(f3);
+    } catch (std::exception &e) {
+        std::cout << "cannot execute form" << std::endl;
+        std::cout << e.what() << std::endl;
+    }
     std::cout << std::endl;
 
-    b1.signForm(f1);
-    b1.signForm(f2);
-    b1.signForm(f3);
-    b1.executeForm(f1);
-    b1.executeForm(f2);
-    b1.executeForm(f3);
+    try {
+        b1.signForm(f1);
+        b1.signForm(f2);
+        b1.signForm(f3);
+    } catch (std::exception &e) {
+        std::cout << "cannot sign form" << std::endl;
+        std::cout << e.what() << std::endl;
+    }
+    try {
+        b1.executeForm(f1);
+        b1.executeForm(f2);
+        b1.executeForm(f3);
+    } catch (std::exception &e) {
+        std::cout << "cannot execute form" << std::endl;
+        std::cout << e.what() << std::endl;
+    }
     std::cout << std::endl;
 
     return 0;
