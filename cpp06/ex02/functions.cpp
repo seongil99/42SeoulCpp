@@ -6,11 +6,13 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:57:03 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/15 15:06:05 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:15:50 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include <iostream>
+#include <typeinfo>
 
 #include "A.hpp"
 #include "B.hpp"

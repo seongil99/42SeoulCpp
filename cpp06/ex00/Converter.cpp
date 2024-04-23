@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:47:51 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 00:14:11 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:00:22 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void Converter::convert(const std::string &input) {
         char *end;
         const char *cstr = input.c_str();
         value = std::strtod(cstr, &end);
-        if (!end) throw std::exception();
-        if (cstr == end) value = std::numeric_limits<double>::quiet_NaN();
+        if (!end)
+            throw std::exception();
+        if (cstr == end)
+            value = std::numeric_limits<double>::quiet_NaN();
     } catch (std::exception &e) {
         std::cout << "Conversion failed" << std::endl;
         return;
@@ -65,14 +67,16 @@ void Converter::convert(const std::string &input) {
 
     std::cout << "float: ";
     try {
-        if (std::isnan(value)) throw std::exception();
-        if (value < std::numeric_limits<float>::lowest())
+        if (std::isnan(value))
+            throw std::exception();
+        if (value < std::numeric_limits<float>::min())
             std::cout << "-inff" << std::endl;
         else if (value > std::numeric_limits<float>::max())
             std::cout << "+inff" << std::endl;
         else {
             std::cout << static_cast<float>(value);
-            if (static_cast<int>(value) == value) std::cout << ".0";
+            if (static_cast<int>(value) == value && value / 1000000 < 1.0)
+                std::cout << ".0";
             std::cout << "f" << std::endl;
         }
     } catch (std::exception &e) {
@@ -81,14 +85,16 @@ void Converter::convert(const std::string &input) {
 
     std::cout << "double: ";
     try {
-        if (std::isnan(value)) throw std::exception();
-        if (value < std::numeric_limits<double>::lowest())
+        if (std::isnan(value))
+            throw std::exception();
+        if (value < std::numeric_limits<double>::min())
             std::cout << "-inf" << std::endl;
         else if (value > std::numeric_limits<double>::max())
             std::cout << "+inf" << std::endl;
         else {
             std::cout << static_cast<double>(value);
-            if (static_cast<int>(value) == value) std::cout << ".0";
+            if (static_cast<int>(value) == value && value / 1000000 < 1.0)
+                std::cout << ".0";
             std::cout << std::endl;
         }
     } catch (std::exception &e) {

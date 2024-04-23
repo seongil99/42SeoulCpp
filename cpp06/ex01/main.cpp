@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:53:06 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/08 20:46:15 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:13:38 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int main(void) {
     data->num = 42;
 
     uintptr_t raw = Serializer::serialize(data);
-    Data *newData = Serializer::deserialize(raw);
+    std::cout << "raw: " << raw << std::endl;
 
+    Data *newData = Serializer::deserialize(raw);
     std::cout << "Data: " << newData->str << " " << newData->num << std::endl;
 
     delete data;
