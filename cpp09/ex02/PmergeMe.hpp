@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 23:03:58 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/24 18:09:17 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/24 18:27:21 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/24 18:28:46 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
-#include "BitcoinExchange.hpp"
+#include <deque>
+#include <vector>
 
-int main(int argc, char **argv) {
-    if (argc != 2) {
-        std::cerr << "Usage: ./bitcoin_exchange [filename]" << std::endl;
-        return 1;
-    }
+class PergeMe {
+   private:
+    int _n;
+    int _m;
+    std::deque<int> _deque;
+    std::vector<int> _vector;
 
-    BitcoinExchange exchange;
-    exchange.run(argv[1]);
+   public:
+    PergeMe();
+    PergeMe(const PergeMe& other);
+    PergeMe& operator=(const PergeMe& other);
+    ~PergeMe();
 
-    return 0;
-}
+    void addNumber(int n);
+    void merge(void);
+    void print(void);
+};
+
+#endif

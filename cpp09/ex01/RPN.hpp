@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/19 23:03:58 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/24 18:09:17 by seonyoon         ###   ########.fr       */
+/*   Created: 2024/04/24 18:10:57 by seonyoon          #+#    #+#             */
+/*   Updated: 2024/04/24 18:13:07 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef RPN_HPP
+#define RPN_HPP
 
-#include "BitcoinExchange.hpp"
+#include <stack>
+#include <string>
 
-int main(int argc, char **argv) {
-    if (argc != 2) {
-        std::cerr << "Usage: ./bitcoin_exchange [filename]" << std::endl;
-        return 1;
-    }
+class RPN {
+   private:
+    std::stack<int> stack;
+    std::string input;
+    int result;
 
-    BitcoinExchange exchange;
-    exchange.run(argv[1]);
+   public:
+    RPN(void);
+    RPN(std::string input);
+    ~RPN(void);
 
-    return 0;
-}
+    RPN &operator=(const RPN &other);
+
+    void calculate(void);
+    int getResult(void);
+};
+
+#endif

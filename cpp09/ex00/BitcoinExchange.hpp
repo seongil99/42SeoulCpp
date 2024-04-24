@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:52 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 18:53:46 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:09:12 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,31 @@
 #include <string>
 
 class BitcoinExchange {
-  private:
+   private:
     std::map<std::string, double> db;
 
-  public:
+   public:
     BitcoinExchange(void);
     BitcoinExchange(const BitcoinExchange &ref);
     ~BitcoinExchange(void);
     BitcoinExchange &operator=(const BitcoinExchange &ref);
 
+    void run(const char *filename);
     void readFile(std::string &filename);
     void printResult(void);
 
     class NegativeNumberException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 
     class LargeNumberException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 
     class BadInputException : public std::exception {
-      public:
+       public:
         virtual const char *what() const throw();
     };
 };
