@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 21:59:57 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 00:08:47 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:40:36 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int main(void) {
     Bureaucrat b1("b1", 1);
     std::cout << b1 << std::endl;
     try {
-        f1 = intern.makeForm("wrong form", "f1");
+        f1 = intern.makeForm("wrong form", "target1");
         std::cout << *f1 << std::endl;
     } catch (std::exception &e) {
         std::cout << "cannot make form" << std::endl;
         std::cout << e.what() << std::endl;
     }
     try {
-        f1 = intern.makeForm("presidential pardon", "f1");
+        f1 = intern.makeForm("presidential pardon", "target1");
         std::cout << *f1 << std::endl;
     } catch (std::exception &e) {
         std::cout << "cannot make form" << std::endl;

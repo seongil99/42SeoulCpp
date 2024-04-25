@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:25 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/22 16:44:57 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:38:34 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
     }
     file << asciiTrees;
     file.close();
-    std::cout << "ShrubberyCreationForm: " << this->getName()
+    std::cout << this->getName() << ": "
               << " created a file: " << this->target << "_shrubbery"
               << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:17 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/22 16:41:12 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:40:06 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
     if (!this->getIsSigned())
         throw FormNotSignedException();
     if (std::rand() % 2) {
-        std::cout << "RobotomyRequestForm: " << this->getName()
+        std::cout << this->getName() << ": " << this->target
                   << " has been robotomized successfully" << std::endl;
     } else {
-        std::cout << "RobotomyRequestForm: " << this->getName()
+        std::cout << this->getName() << ": " << this->target
                   << " failed to robotomize" << std::endl;
     }
 }

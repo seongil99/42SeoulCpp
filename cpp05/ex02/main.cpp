@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 21:59:57 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 00:06:19 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/25 15:39:31 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int main(void) {
     std::cout << b3 << std::endl;
     std::cout << std::endl;
 
-    PresidentialPardonForm f1("f1");
+    PresidentialPardonForm f1("target1");
     std::cout << f1 << std::endl;
-    RobotomyRequestForm f2("f2");
+    RobotomyRequestForm f2("target2");
     std::cout << f2 << std::endl;
-    ShrubberyCreationForm f3("f3");
+    ShrubberyCreationForm f3("target3");
     std::cout << f3 << std::endl;
     std::cout << std::endl;
 
