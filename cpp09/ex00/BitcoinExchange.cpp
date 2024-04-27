@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:55 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/24 18:09:33 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:04:54 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,54 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &ref) {
 BitcoinExchange::~BitcoinExchange(void) {}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &ref) {
-    if (this == &ref) return *this;
+    if (this == &ref)
+        return *this;
     this->db = ref.db;
     return *this;
 }
 
-void BitcoinExchange::readFile(std::string &filename) {
+bool BitcoinExchange::_checkDate(const std::string &date) const {}
+
+void BitcoinExchange::readInputFile(const char *filename) {
     std::ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Error: file open failed" << std::endl;
-        return;
-    }
+    if (!file.is_open())
+        throw BitcoinExchange::FileErrorException();
 
     std::string line;
     while (std::getline(file, line)) {
-        std::string key;
-        double value;
+        size_t idx = line.find('|');
+        std::string date = line.substr(0, idx);
+        std::string value = line.substr(idx + 1);
+        std::cout << date << "|" << value << ";" << std::endl;
+    }
+}
+
+void BitcoinExchange::readCSV(void) {
+    std::ifstream file("data.csv");
+    if (!file.is_open())
+        throw BitcoinExchange::FileErrorException();
+
+    std::string line;
+    std::getline(file, line);
+    while (std::getline(file, line, ',')) {
         std::istringstream iss(line);
-        if (!(iss >> key >> value)) {
-            throw BitcoinExchange::BadInputException();
-        }
-        if (value < 0) {
-            throw BitcoinExchange::NegativeNumberException();
-        }
-        if (value > 1000000) {
-            throw BitcoinExchange::LargeNumberException();
-        }
-        this->db[key] = value;
+        std::string key;
+        iss >> key;
+
+        std::getline(file, line);
+        std::istringstream iss2(line);
+        double value;
+        iss2 >> value;
+
+        db[key] = value;
     }
 }
 
 void BitcoinExchange::run(const char *filename) {
-    std::string str(filename);
-    this->readFile(str);
-    this->printResult();
+    this->readCSV();
+    this->readInputFile(filename);
+    // this->printResult();
+    (void)filename;
 }
 
 void BitcoinExchange::printResult(void) {
@@ -78,4 +92,8 @@ const char *BitcoinExchange::LargeNumberException::what() const throw() {
 
 const char *BitcoinExchange::BadInputException::what() const throw() {
     return "Error: bad input";
+}
+
+const char *BitcoinExchange::FileErrorException::what() const throw() {
+    return "Error: file error";
 }

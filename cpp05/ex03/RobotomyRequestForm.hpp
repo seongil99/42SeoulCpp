@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:21 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 21:36:47 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:31:09 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #include "AForm.hpp"
 
 class RobotomyRequestForm : public AForm {
-   private:
+  private:
     const std::string target;
 
-   public:
+  public:
     RobotomyRequestForm(void);
     RobotomyRequestForm(const std::string &target);
     RobotomyRequestForm(const RobotomyRequestForm &ref);
@@ -32,7 +32,5 @@ class RobotomyRequestForm : public AForm {
 
     void execute(Bureaucrat const &executor) const;
 };
-
-std::ostream &operator<<(std::ostream &os, const RobotomyRequestForm &ref);
 
 #endif

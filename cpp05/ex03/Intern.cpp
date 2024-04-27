@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 22:33:30 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 22:49:28 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:41:07 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ AForm *Intern::makeForm(const std::string &formName,
         } else
             delete forms[i];
     }
-    if (!ret) throw Intern::FormNotFoundException();
+    if (!ret)
+        throw Intern::FormNotFoundException();
     return (ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 20:29:07 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/19 15:13:28 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/26 19:10:30 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include "MutantStack.hpp"
 
-int main() {
+int main(void) {
+    std::cout << "------------------------------" << std::endl;
     std::cout << "MutantStack test" << std::endl;
     std::cout << "------------------------------" << std::endl;
     {
@@ -38,7 +39,12 @@ int main() {
             ++it;
         }
         std::stack<int> s(mstack);
+        while (!s.empty()) {
+            std::cout << s.top() << std::endl;
+            s.pop();
+        }
     }
+    std::cout << "------------------------------" << std::endl;
     std::cout << "<list> test" << std::endl;
     std::cout << "------------------------------" << std::endl;
     {
@@ -61,6 +67,10 @@ int main() {
             ++it;
         }
         std::list<int> s(list);
+        while (s.size()) {
+            std::cout << s.back() << std::endl;
+            s.pop_back();
+        }
     }
 
     return 0;

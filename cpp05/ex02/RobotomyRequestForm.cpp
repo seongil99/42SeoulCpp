@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:17 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/25 15:40:06 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:29:00 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,4 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
         std::cout << this->getName() << ": " << this->target
                   << " failed to robotomize" << std::endl;
     }
-}
-
-std::ostream &operator<<(std::ostream &os, const RobotomyRequestForm &ref) {
-    os << "RobotomyRequestForm: " << ref.getName()
-       << ", SignGrade: " << ref.getToSign()
-       << ", ExecuteGrade: " << ref.getToExec()
-       << ", isSigned: " << ref.getIsSigned();
-    return (os);
 }

@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:12 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/25 15:38:11 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:28:56 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,4 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
         throw FormNotSignedException();
     std::cout << this->getName() << ": " << this->target
               << " has been pardoned by Zafod Beeblebrox" << std::endl;
-}
-
-std::ostream &operator<<(std::ostream &os, const PresidentialPardonForm &ref) {
-    os << "PresidentialPardonForm: " << ref.getName()
-       << ", SignGrade: " << ref.getToSign()
-       << ", ExecuteGrade: " << ref.getToExec()
-       << ", isSigned: " << ref.getIsSigned();
-    return (os);
 }

@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:15:14 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/07 22:23:00 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:31:04 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 #include "AForm.hpp"
 
 class PresidentialPardonForm : public AForm {
-   private:
+  private:
     const std::string target;
 
-   public:
+  public:
     PresidentialPardonForm(void);
     PresidentialPardonForm(const std::string &target);
     PresidentialPardonForm(const PresidentialPardonForm &ref);
@@ -32,7 +32,5 @@ class PresidentialPardonForm : public AForm {
 
     void execute(Bureaucrat const &executor) const;
 };
-
-std::ostream &operator<<(std::ostream &os, const PresidentialPardonForm &ref);
 
 #endif
