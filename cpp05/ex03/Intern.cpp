@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 22:33:30 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/27 20:02:18 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/27 20:02:56 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ AForm *Intern::makeForm(const std::string &formName,
 }
 
 const char *Intern::FormNotFoundException::what() const throw() {
-    return ("Intern cannot create form. Form not found");
+    return ("Intern couldn't create form. Form not found");
 }
