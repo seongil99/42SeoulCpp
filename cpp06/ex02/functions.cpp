@@ -6,13 +6,12 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 14:57:03 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 16:15:50 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:35:04 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 #include <iostream>
-#include <typeinfo>
 
 #include "A.hpp"
 #include "B.hpp"
@@ -41,6 +40,8 @@ void identify(Base *p) {
         std::cout << "B" << std::endl;
     } else if (dynamic_cast<C *>(p)) {
         std::cout << "C" << std::endl;
+    } else {
+        std::cout << "Unknown class ptr" << std::endl;
     }
 }
 
@@ -49,18 +50,18 @@ void identify(Base &p) {
         A &a = dynamic_cast<A &>(p);
         (void)a;
         std::cout << "A" << std::endl;
-    } catch (std::bad_cast &e) {
+    } catch (std::exception &e) {
         try {
             B &b = dynamic_cast<B &>(p);
             (void)b;
             std::cout << "B" << std::endl;
-        } catch (std::bad_cast &e) {
+        } catch (std::exception &e) {
             try {
                 C &c = dynamic_cast<C &>(p);
                 (void)c;
                 std::cout << "C" << std::endl;
-            } catch (std::bad_cast &e) {
-                std::cout << "Unknown class" << std::endl;
+            } catch (std::exception &e) {
+                std::cout << "Unknown class ref" << std::endl;
             }
         }
     }

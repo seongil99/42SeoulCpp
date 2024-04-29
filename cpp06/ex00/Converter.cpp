@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:47:51 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/29 16:10:25 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/29 19:01:54 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void Converter::convert(const std::string &input) {
         value = std::strtod(cstr, &end);
         if (!end)
             throw std::exception();
-        if (cstr == end)
+        if (cstr == end || !((*end == 'f' && !*(end + 1)) || !*end))
             value = std::numeric_limits<double>::quiet_NaN();
     } catch (std::exception &e) {
         std::cout << "Conversion failed" << std::endl;
