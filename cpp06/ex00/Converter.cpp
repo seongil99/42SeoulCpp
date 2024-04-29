@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 19:47:51 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 16:00:22 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:10:25 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Converter::~Converter(void) {}
 void Converter::convert(const std::string &input) {
     double value = 0;
     try {
-        char *end;
+        char *end = NULL;
         const char *cstr = input.c_str();
         value = std::strtod(cstr, &end);
         if (!end)
@@ -45,7 +45,8 @@ void Converter::convert(const std::string &input) {
 
     std::cout << "char: ";
     try {
-        if (value < 0 || value > 127 || std::isnan(value))
+        if (value < std::numeric_limits<char>::min() ||
+            value > std::numeric_limits<char>::max() || std::isnan(value))
             throw std::exception();
         if (std::isprint(static_cast<int>(value)))
             std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
@@ -69,7 +70,7 @@ void Converter::convert(const std::string &input) {
     try {
         if (std::isnan(value))
             throw std::exception();
-        if (value < std::numeric_limits<float>::min())
+        if (value < -std::numeric_limits<float>::max())
             std::cout << "-inff" << std::endl;
         else if (value > std::numeric_limits<float>::max())
             std::cout << "+inff" << std::endl;
@@ -87,7 +88,7 @@ void Converter::convert(const std::string &input) {
     try {
         if (std::isnan(value))
             throw std::exception();
-        if (value < std::numeric_limits<double>::min())
+        if (value < -std::numeric_limits<double>::max())
             std::cout << "-inf" << std::endl;
         else if (value > std::numeric_limits<double>::max())
             std::cout << "+inf" << std::endl;

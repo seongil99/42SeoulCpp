@@ -6,13 +6,14 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:52:43 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 16:06:24 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/29 16:31:31 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SERIALIZER_HPP
 #define SERIALIZER_HPP
 
+#include <stdint.h>
 #include <string>
 
 #include "Data.hpp"
