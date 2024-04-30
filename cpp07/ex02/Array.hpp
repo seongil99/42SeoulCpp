@@ -13,42 +13,55 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
-template <typename T>
-class Array {
-   private:
+template <typename T> class Array {
+  private:
     T *_arr;
     unsigned int _size;
 
-   public:
+  public:
     Array(void) : _arr(NULL), _size(0) {}
+
     Array(unsigned int n) : _arr(new T[n]), _size(n) {}
-    Array(const Array &other) : _arr(new T[other._size]), _size(other._size) {
-        if (!_arr) return;
-        if (!other._arr) return;
-        for (unsigned int i = 0; i < _size; i++) _arr[i] = other._arr[i];
+
+    Array(const Array &other) : _size(other._size) {
+        if (!other._arr)
+            return;
+        _arr = new T[other._size];
+        if (!_arr)
+            return;
+        for (unsigned int i = 0; i < _size; i++)
+            _arr[i] = other._arr[i];
     }
+
     virtual ~Array() { delete[] _arr; }
 
     Array &operator=(const Array &other) {
-        if (this == &other) return *this;
-        if (!other._arr) return *this;
+        if (this == &other || !other._arr)
+            return *this;
+        T *t = new T[other._size];
+        if (!t)
+            return *this;
+        for (unsigned int i = 0; i < other._size; i++)
+            t[i] = other._arr[i];
         delete[] _arr;
-        _arr = new T[other._size];
-        if (!_arr) return *this;
         _size = other._size;
-        for (unsigned int i = 0; i < _size; i++) _arr[i] = other._arr[i];
+        _arr = t;
         return *this;
     }
 
     T &operator[](unsigned int i) {
-        if (!_arr) throw Null_arrayException();
-        if (i >= _size) throw OutOfRangeException();
+        if (!_arr)
+            throw Null_arrayException();
+        if (i >= _size)
+            throw OutOfRangeException();
         return _arr[i];
     }
 
     const T &operator[](unsigned int i) const {
-        if (!_arr) throw Null_arrayException();
-        if (i >= _size) throw OutOfRangeException();
+        if (!_arr)
+            throw Null_arrayException();
+        if (i >= _size)
+            throw OutOfRangeException();
         return _arr[i];
     }
 
