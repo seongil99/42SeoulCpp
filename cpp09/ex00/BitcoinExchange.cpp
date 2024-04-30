@@ -6,12 +6,13 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:55 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/27 17:04:54 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/04/30 19:19:25 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -31,7 +32,20 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &ref) {
     return *this;
 }
 
-bool BitcoinExchange::_checkDate(const std::string &date) const {}
+bool BitcoinExchange::_checkDate(const std::string &date) const {
+    for (size_t i = 0; i < date.size(); i++) {
+    }
+    return true;
+}
+
+int BitcoinExchange::_convertValue(const std::string &value) const {
+    char *end;
+    const char *cstr = value.c_str();
+    double ret = std::strtod(cstr, &end);
+    if (*end)
+        throw BitcoinExchange::BadInputException();
+    return ret;
+}
 
 void BitcoinExchange::readInputFile(const char *filename) {
     std::ifstream file(filename);
@@ -41,9 +55,12 @@ void BitcoinExchange::readInputFile(const char *filename) {
     std::string line;
     while (std::getline(file, line)) {
         size_t idx = line.find('|');
-        std::string date = line.substr(0, idx);
+        std::string date = line.substr(0, idx - 1);
         std::string value = line.substr(idx + 1);
-        std::cout << date << "|" << value << ";" << std::endl;
+        std::map<std::string, double>::iterator f = db.find(date);
+        double t = std::strtod(value.c_str(), NULL);
+        if (f != db.end())
+            std::cout << date << " => " << (*f).second * t << std::endl;
     }
 }
 
@@ -72,7 +89,6 @@ void BitcoinExchange::run(const char *filename) {
     this->readCSV();
     this->readInputFile(filename);
     // this->printResult();
-    (void)filename;
 }
 
 void BitcoinExchange::printResult(void) {
@@ -95,5 +111,5 @@ const char *BitcoinExchange::BadInputException::what() const throw() {
 }
 
 const char *BitcoinExchange::FileErrorException::what() const throw() {
-    return "Error: file error";
+    return "Error: could not open file";
 }
