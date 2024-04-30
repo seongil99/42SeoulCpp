@@ -59,7 +59,7 @@ template <typename T> class Array {
 
     const T &operator[](unsigned int i) const {
         if (!_arr)
-            throw Null_arrayException();
+            throw NullArrayException();
         if (i >= _size)
             throw OutOfRangeException();
         return _arr[i];
@@ -71,7 +71,7 @@ template <typename T> class Array {
         virtual const char *what() const throw() { return "Out of range"; }
     };
 
-    class Null_arrayException : public std::exception {
+    class NullArrayException : public std::exception {
         virtual const char *what() const throw() { return "Null Array"; }
     };
 };
