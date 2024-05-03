@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:55 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/30 19:19:25 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:37:30 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ bool BitcoinExchange::_checkDate(const std::string &date) const {
     return true;
 }
 
-int BitcoinExchange::_convertValue(const std::string &value) const {
+double BitcoinExchange::_convertValue(const std::string &value) const {
     char *end;
     const char *cstr = value.c_str();
     double ret = std::strtod(cstr, &end);
-    if (*end)
+    if (ret < 0)
+        throw BitcoinExchange::NegativeNumberException();
+    if (ret > 1000)
+        throw BitcoinExchange::LargeNumberException();
+    if (*end || static_cast<int>(ret) != ret)
         throw BitcoinExchange::BadInputException();
     return ret;
 }
@@ -58,7 +62,7 @@ void BitcoinExchange::readInputFile(const char *filename) {
         std::string date = line.substr(0, idx - 1);
         std::string value = line.substr(idx + 1);
         std::map<std::string, double>::iterator f = db.find(date);
-        double t = std::strtod(value.c_str(), NULL);
+        double t = _convertValue(value);
         if (f != db.end())
             std::cout << date << " => " << (*f).second * t << std::endl;
     }

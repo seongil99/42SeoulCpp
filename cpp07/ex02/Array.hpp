@@ -51,7 +51,7 @@ template <typename T> class Array {
 
     T &operator[](unsigned int i) {
         if (!_arr)
-            throw Null_arrayException();
+            throw NullArrayException();
         if (i >= _size)
             throw OutOfRangeException();
         return _arr[i];

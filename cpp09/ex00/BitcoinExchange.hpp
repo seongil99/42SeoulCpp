@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:52 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/30 19:17:44 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/03 14:34:54 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class BitcoinExchange {
   private:
     std::map<std::string, double> db;
     bool _checkDate(const std::string &date) const;
-    int _convertValue(const std::string &value) const;
+    double _convertValue(const std::string &value) const;
 
   public:
     BitcoinExchange(void);
