@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:27:21 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/03 19:07:55 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:32:46 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,34 @@
 #define PMERGEME_HPP
 
 #include <deque>
+#include <iostream>
 #include <vector>
 
-class PergeMe {
+class PmergeMe {
   private:
-    int _n;
-    int _m;
+    double _t_deq;
+    double _t_vec;
+    std::vector<int> _before;
     std::deque<int> _dq;
     std::vector<int> _vec;
+    void _addNumber(int n);
+    bool _is_integer(const char *str);
 
   public:
-    PergeMe(void);
-    PergeMe(const PergeMe &other);
-    ~PergeMe(void);
+    PmergeMe(void);
+    PmergeMe(const PmergeMe &other);
+    ~PmergeMe(void);
 
-    PergeMe &operator=(const PergeMe &other);
+    PmergeMe &operator=(const PmergeMe &other);
 
-    void addNumber(int n);
-    void merge(void);
+    void addNumber(int ac, char *av[]);
+    void sort(void);
     void print(void);
+
+    class BadInputException : public std::exception {
+      public:
+        virtual const char *what() const throw();
+    };
 };
 
 #endif

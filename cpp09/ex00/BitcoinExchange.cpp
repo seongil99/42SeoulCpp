@@ -6,16 +6,18 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:55 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/03 14:37:30 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/04 18:36:17 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <utility>
 
 BitcoinExchange::BitcoinExchange(void) {}
 
@@ -51,6 +53,11 @@ double BitcoinExchange::_convertValue(const std::string &value) const {
     return ret;
 }
 
+bool cmp(std::map<std::string, double>::iterator &s1,
+         std::map<std::string, double>::iterator &s2) {
+    return (*s1).first < (*s2).first;
+}
+
 void BitcoinExchange::readInputFile(const char *filename) {
     std::ifstream file(filename);
     if (!file.is_open())
@@ -63,8 +70,10 @@ void BitcoinExchange::readInputFile(const char *filename) {
         std::string value = line.substr(idx + 1);
         std::map<std::string, double>::iterator f = db.find(date);
         double t = _convertValue(value);
+        std::map<std::string, double>::iterator tt =
+            std::lower_bound(db.begin(), db.end(), date, cmp);
         if (f != db.end())
-            std::cout << date << " => " << (*f).second * t << std::endl;
+            std::cout << date << " => " << (*tt).second * t << std::endl;
     }
 }
 

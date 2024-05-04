@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 15:33:08 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/15 17:51:55 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:42:17 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #define ITER_HPP
 
 #include <cstddef>
+#include <iostream>
 
-template <typename T>
-void iter(T *arr, size_t len, void (*func)(T const &)) {
+template <typename T> void iter(T *arr, size_t len, void (*func)(T const &)) {
     if (!arr || !func) {
         return;
     }
@@ -25,9 +25,6 @@ void iter(T *arr, size_t len, void (*func)(T const &)) {
     }
 }
 
-template <typename T>
-void print(T const &elem) {
-    std::cout << elem << ' ';
-}
+template <typename T> void print(T const &elem) { std::cout << elem << ' '; }
 
 #endif

@@ -4,6 +4,7 @@ CXXFLAGS		= -Wall -Wextra -Werror -MMD -MP -std=c++98
 NAME			= PmergeMe
 
 SRCS			= main.cpp \
+					PmergeMe.cpp \
 
 OBJS			= $(SRCS:.cpp=.o)
 
