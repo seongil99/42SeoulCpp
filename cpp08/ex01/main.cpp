@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:55:34 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/15 18:57:57 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:31:39 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(void) {
     std::cout << "Longest span: " << sp.longestSpan() << std::endl;
 
     Span sp2 = Span(10000);
-    sp2.fillRandom();
+    sp2.addNumber(sp.begin(), sp.end());
     std::cout << "Shortest span: " << sp2.shortestSpan() << std::endl;
     std::cout << "Longest span: " << sp2.longestSpan() << std::endl;
 

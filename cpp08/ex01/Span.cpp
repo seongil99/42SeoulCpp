@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:49:39 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/23 16:19:20 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:02 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 
 Span::Span(void) : _n(0) {}
 
-Span::Span(unsigned int n) : _n(n) {
-    _size = 0;
-    _v = std::vector<int>(n);
-}
+Span::Span(unsigned int n) : _n(n) {}
 
 Span::Span(const Span &other) { *this = other; }
 
@@ -30,24 +27,32 @@ Span &Span::operator=(const Span &other) {
     if (this == &other)
         return *this;
     _n = other._n;
-    _size = other._size;
     _v = other._v;
     return *this;
 }
 
 void Span::addNumber(int n) {
-    if (_size >= _n)
+    if (_v.size() + 1 > _n)
         throw std::exception();
-    _v[_size++] = n;
+    _v.push_back(n);
+}
+
+void Span::addNumber(std::vector<int>::iterator b,
+                     std::vector<int>::iterator e) {
+    for (; b != e && _v.size() <= _n; b++) {
+        if (_v.size() == _n)
+            throw std::exception();
+        _v.push_back(*b);
+    }
 }
 
 unsigned int Span::shortestSpan(void) {
-    if (_size <= 1)
+    if (_v.size() <= 1)
         throw std::exception();
     std::vector<int> v = _v;
-    std::sort(v.begin(), v.begin() + _size);
+    std::sort(v.begin(), v.begin() + _v.size());
     unsigned int min = UINT_MAX;
-    for (unsigned int i = 1; i < _size; i++) {
+    for (size_t i = 1; i < _v.size(); i++) {
         unsigned int diff = v[i] - v[i - 1];
         if (diff < min)
             min = diff;
@@ -56,16 +61,12 @@ unsigned int Span::shortestSpan(void) {
 }
 
 unsigned int Span::longestSpan(void) {
-    if (_size <= 1)
+    if (_v.size() <= 1)
         throw std::exception();
     std::vector<int> v = _v;
-    std::sort(v.begin(), v.begin() + _size);
-    return v[_size - 1] - v[0];
+    std::sort(v.begin(), v.begin() + _v.size());
+    return v[_v.size() - 1] - v[0];
 }
 
-void Span::fillRandom(void) {
-    for (unsigned int i = 0; i < _n; i++) {
-        _v[i] = rand();
-    }
-    _size = _n;
-}
+std::vector<int>::iterator Span::begin(void) { return _v.begin(); }
+std::vector<int>::iterator Span::end(void) { return _v.end(); }

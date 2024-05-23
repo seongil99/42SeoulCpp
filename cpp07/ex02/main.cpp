@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 17:30:35 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/04 14:42:31 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:52:18 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "Array.hpp"
 
 int main(void) {
-    Array<int> emptyArray;
+    const Array<int> emptyArray;
     Array<int> intArray(5);
     Array<std::string> stringArray(3);
 
