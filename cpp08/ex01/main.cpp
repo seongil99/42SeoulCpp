@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:55:34 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/23 15:31:39 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:50:32 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int main(void) {
     sp2.addNumber(sp.begin(), sp.end());
     std::cout << "Shortest span: " << sp2.shortestSpan() << std::endl;
     std::cout << "Longest span: " << sp2.longestSpan() << std::endl;
+
+    try {
+        Span sp3(1);
+        sp.addNumber(1);
+        sp.addNumber(2);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
 
     return 0;
 }

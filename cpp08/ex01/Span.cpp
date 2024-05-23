@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:49:39 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/23 15:32:02 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:09:19 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Span &Span::operator=(const Span &other) {
 
 void Span::addNumber(int n) {
     if (_v.size() + 1 > _n)
-        throw std::exception();
+        throw std::out_of_range("out of range");
     _v.push_back(n);
 }
 
@@ -41,14 +41,14 @@ void Span::addNumber(std::vector<int>::iterator b,
                      std::vector<int>::iterator e) {
     for (; b != e && _v.size() <= _n; b++) {
         if (_v.size() == _n)
-            throw std::exception();
+            throw std::out_of_range("out of range");
         _v.push_back(*b);
     }
 }
 
 unsigned int Span::shortestSpan(void) {
     if (_v.size() <= 1)
-        throw std::exception();
+        throw std::runtime_error("not enough number stored");
     std::vector<int> v = _v;
     std::sort(v.begin(), v.begin() + _v.size());
     unsigned int min = UINT_MAX;
@@ -62,7 +62,7 @@ unsigned int Span::shortestSpan(void) {
 
 unsigned int Span::longestSpan(void) {
     if (_v.size() <= 1)
-        throw std::exception();
+        throw std::runtime_error("not enough number stored");
     std::vector<int> v = _v;
     std::sort(v.begin(), v.begin() + _v.size());
     return v[_v.size() - 1] - v[0];

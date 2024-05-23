@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:45:35 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/23 15:21:48 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:55:09 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define SPAN_HPP
 
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 class Span {
