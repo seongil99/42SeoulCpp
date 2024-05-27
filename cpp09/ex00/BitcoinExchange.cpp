@@ -6,14 +6,13 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:55 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/24 16:55:48 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:25:14 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
 #include <algorithm>
-#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -51,9 +50,7 @@ bool BitcoinExchange::_checkDate(const std::string &date) const {
     ss >> year;
     ss >> month;
     ss >> day;
-    std::cout << "check date:" << year << ' ' << month << ' ' << day
-              << std::endl;
-    if (year < 0)
+    if (year < 1)
         return false;
     if (month < 1 || month > 12)
         return false;
@@ -63,34 +60,24 @@ bool BitcoinExchange::_checkDate(const std::string &date) const {
 }
 
 double BitcoinExchange::_convertValue(const std::string &value) const {
-    char *end;
+    char *end = NULL;
     const char *cstr = value.c_str();
     double ret = std::strtod(cstr, &end);
     if (ret < 0)
         throw BitcoinExchange::NegativeNumberException();
     if (ret > 1000)
         throw BitcoinExchange::LargeNumberException();
-    if (*end)
+    if (*end || end == cstr)
         throw BitcoinExchange::BadInputException();
     return ret;
 }
 
-bool cmp(const std::pair<const std::string, double> &s1,
-         const std::pair<const std::string, double> &s2) {
-    return (s1).first > (s2).first;
-}
-
-bool cmp1(const std::pair<const std::string, double> &pair,
-          const std::string &value) {
+bool cmp(const std::pair<const std::string, double> &pair,
+         const std::string &value) {
     return pair.first < value;
 }
 
-bool cmp2(const std::string &value,
-          const std::pair<const std::string, double> &pair) {
-    return value < pair.first;
-}
-
-void BitcoinExchange::readInputFile(const char *filename) {
+void BitcoinExchange::processInputFile(const char *filename) {
     std::ifstream file(filename);
     if (!file.is_open())
         throw BitcoinExchange::FileErrorException();
@@ -101,20 +88,31 @@ void BitcoinExchange::readInputFile(const char *filename) {
             size_t idx = line.find('|');
             std::string date = line.substr(0, idx - 1);
             std::string value = line.substr(idx + 1);
-            _checkDate(date);
-            std::map<std::string, double>::iterator f = db.find(date);
+            std::map<std::string, double>::iterator iter;
+
+            if (!_checkDate(date) || idx == std::string::npos)
+                throw BitcoinExchange::BadInputException();
+
             double t = _convertValue(value);
-            std::map<std::string, double>::iterator tt =
-                std::lower_bound(db.begin(), db.end(), date, cmp1);
-            if (f != db.end())
-                std::cout << date << " => " << (*tt).second * t << std::endl;
+
+            iter = db.find(date);
+            if (iter == db.end()) {
+                iter = std::lower_bound(db.begin(), db.end(), date, cmp);
+                if (iter == db.begin() || db.begin() == db.end())
+                    throw BitcoinExchange::NoDataException();
+                iter--;
+            }
+
+            std::cout << date << " => " << (*iter).second * t << std::endl;
+        } catch (const BitcoinExchange::BadInputException &e) {
+            std::cerr << e.what() << " => " << line << std::endl;
         } catch (const std::exception &e) {
             std::cerr << e.what() << std::endl;
         }
     }
 }
 
-void BitcoinExchange::readCSV(void) {
+void BitcoinExchange::readDB(void) {
     std::ifstream file("data.csv");
     if (!file.is_open())
         throw BitcoinExchange::FileErrorException();
@@ -136,24 +134,16 @@ void BitcoinExchange::readCSV(void) {
 }
 
 void BitcoinExchange::run(const char *filename) {
-    this->readCSV();
-    this->readInputFile(filename);
-    // this->printResult();
-}
-
-void BitcoinExchange::printResult(void) {
-    for (std::map<std::string, double>::iterator it = this->db.begin();
-         it != this->db.end(); it++) {
-        std::cout << it->first << " : " << it->second << std::endl;
-    }
+    this->readDB();
+    this->processInputFile(filename);
 }
 
 const char *BitcoinExchange::NegativeNumberException::what() const throw() {
-    return "Error: negative number";
+    return "Error: not a positive number";
 }
 
 const char *BitcoinExchange::LargeNumberException::what() const throw() {
-    return "Error: large number";
+    return "Error: too large number";
 }
 
 const char *BitcoinExchange::BadInputException::what() const throw() {
@@ -162,4 +152,8 @@ const char *BitcoinExchange::BadInputException::what() const throw() {
 
 const char *BitcoinExchange::FileErrorException::what() const throw() {
     return "Error: could not open file";
+}
+
+const char *BitcoinExchange::NoDataException::what() const throw() {
+    return "Error: no data exist";
 }

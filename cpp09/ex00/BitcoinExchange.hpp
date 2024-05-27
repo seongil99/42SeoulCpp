@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 23:03:52 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/23 19:14:48 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/27 20:18:46 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ class BitcoinExchange {
     BitcoinExchange &operator=(const BitcoinExchange &ref);
 
     void run(const char *filename);
-    void readInputFile(const char *filename);
-    void readCSV(void);
-    void printResult(void);
+    void processInputFile(const char *filename);
+    void readDB(void);
 
     class NegativeNumberException : public std::exception {
       public:
@@ -49,6 +48,10 @@ class BitcoinExchange {
     };
 
     class FileErrorException : public std::exception {
+      public:
+        virtual const char *what() const throw();
+    };
+    class NoDataException : public std::exception {
       public:
         virtual const char *what() const throw();
     };
