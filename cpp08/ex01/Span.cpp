@@ -6,14 +6,14 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 18:49:39 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/23 19:09:19 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:56:18 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 
 #include <algorithm>
-#include <climits>
+#include <limits>
 
 Span::Span(void) : _n(0) {}
 
@@ -51,7 +51,7 @@ unsigned int Span::shortestSpan(void) {
         throw std::runtime_error("not enough number stored");
     std::vector<int> v = _v;
     std::sort(v.begin(), v.begin() + _v.size());
-    unsigned int min = UINT_MAX;
+    unsigned int min = std::numeric_limits<unsigned int>::max();
     for (size_t i = 1; i < _v.size(); i++) {
         unsigned int diff = v[i] - v[i - 1];
         if (diff < min)
