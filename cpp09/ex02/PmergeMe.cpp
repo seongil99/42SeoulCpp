@@ -14,6 +14,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <ctime>
 #include <limits>
 
 PmergeMe::PmergeMe(void) : _t_deq(0), _t_vec(0) {}
@@ -77,7 +78,39 @@ void PmergeMe::print(void) {
               << _t_deq << " us" << std::endl;
 }
 
-void PmergeMe::sort(void) {}
+void PmergeMe::mergeInsertionSort(std::vector<int> &c, int start, int end) {
+    if (start >= end)
+        return;
+    int mid = (start + end) / 2;
+    mergeInsertionSort(c, start, mid);
+    mergeInsertionSort(c, mid + 1, end);
+    std::inplace_merge(c.begin() + start, c.begin() + mid + 1,
+                       c.begin() + end + 1);
+}
+
+void PmergeMe::mergeInsertionSort(std::deque<int> &c, int start, int end) {}
+
+void PmergeMe::sort(void) {
+    struct timespec start, end;
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    for (unsigned int i = 0; i < _before.size(); i++) {
+        _vec.push_back(_before[i]);
+    }
+    mergeInsertionSort(_vec, 0, _vec.size() - 1);
+    clock_gettime(CLOCK_REALTIME, &end);
+    _t_vec = (end.tv_sec - start.tv_sec) * 1000000 +
+             (end.tv_nsec - start.tv_nsec) / 1000;
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    for (unsigned int i = 0; i < _before.size(); i++) {
+        _dq.push_back(_before[i]);
+    }
+    mergeInsertionSort(_dq, 0, _dq.size() - 1);
+    clock_gettime(CLOCK_REALTIME, &end);
+    _t_deq = (end.tv_sec - start.tv_sec) * 1000000 +
+             (end.tv_nsec - start.tv_nsec) / 1000;
+}
 
 const char *PmergeMe::BadInputException::what() const throw() {
     return "Bad Input";

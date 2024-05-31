@@ -35,6 +35,8 @@ class PmergeMe {
     PmergeMe &operator=(const PmergeMe &other);
 
     void addNumber(int ac, char *av[]);
+    void mergeInsertionSort(std::vector<int> &vec, int start, int end);
+    void mergeInsertionSort(std::deque<int> &dq, int start, int end);
     void sort(void);
     void print(void);
 
