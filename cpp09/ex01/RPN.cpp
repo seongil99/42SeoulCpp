@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:11:23 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/26 16:20:16 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:01:44 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,44 +44,54 @@ void RPN::calculate(void) {
     std::istringstream iss(input);
     while (iss >> token) {
         if (token == "+") {
+            if (stack.size() < 2)
+                throw RPN::BadInputException();
             int a = stack.top();
             stack.pop();
             int b = stack.top();
             stack.pop();
             stack.push(b + a);
         } else if (token == "-") {
+            if (stack.size() < 2)
+                throw RPN::BadInputException();
             int a = stack.top();
             stack.pop();
             int b = stack.top();
             stack.pop();
             stack.push(b - a);
         } else if (token == "*") {
+            if (stack.size() < 2)
+                throw RPN::BadInputException();
             int a = stack.top();
             stack.pop();
             int b = stack.top();
             stack.pop();
             stack.push(b * a);
         } else if (token == "/") {
+            if (stack.size() < 2)
+                throw RPN::BadInputException();
             int a = stack.top();
             stack.pop();
             int b = stack.top();
             if (a == 0)
-                throw RPN::DivisionByZero();
+                throw RPN::DivisionByZeroException();
             stack.pop();
             stack.push(b / a);
         } else if (_is_digit(token)) {
             stack.push(std::atoi(token.c_str()));
         } else {
-            throw RPN::BadInputError();
+            throw RPN::BadInputException();
         }
     }
+    if (stack.size() != 1)
+        throw RPN::BadInputException();
     result = stack.top();
 }
 
 int RPN::getResult(void) { return result; }
 
-const char *RPN::BadInputError::what() const throw() { return "Error"; }
+const char *RPN::BadInputException::what() const throw() { return "Bad input"; }
 
-const char *RPN::DivisionByZero::what() const throw() {
+const char *RPN::DivisionByZeroException::what() const throw() {
     return "Division by zero";
 }

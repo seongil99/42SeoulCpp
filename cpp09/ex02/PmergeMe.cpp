@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:27:24 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/04 17:52:32 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:53:08 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,17 @@ void PmergeMe::print(void) {
     for (unsigned int i = 0; i < _vec.size(); i++)
         std::cout << _vec[i] << " ";
     std::cout << std::endl;
-    std::cout << "Time to process a range of 5 elements with std::vector : "
-              << _t_vec << " us" << std::endl;
-    std::cout << "Time to process a range of 5 elements with std::deq : "
-              << _t_deq << " us" << std::endl;
+    std::cout << "Time to process a range of " << _vec.size()
+              << " elements with std::vector : " << _t_vec << " us"
+              << std::endl;
+    std::cout << "Time to process a range of " << _dq.size()
+              << " elements with std::deque : " << _t_deq << " us" << std::endl;
+}
+
+void merInsSort(std::vector<int> &c) {
+    int chain_size = c.size() / 2;
+    for (int i = 0; i < chain_size; i++)
+        ;
 }
 
 void PmergeMe::mergeInsertionSort(std::vector<int> &c, int start, int end) {
@@ -84,11 +91,17 @@ void PmergeMe::mergeInsertionSort(std::vector<int> &c, int start, int end) {
     int mid = (start + end) / 2;
     mergeInsertionSort(c, start, mid);
     mergeInsertionSort(c, mid + 1, end);
-    std::inplace_merge(c.begin() + start, c.begin() + mid + 1,
-                       c.begin() + end + 1);
+    for (int i = start; i <= end; i++)
+        std::cout << c[i] << ' ';
+    std::cout << std::endl;
+    std::vector<int> temp;
 }
 
-void PmergeMe::mergeInsertionSort(std::deque<int> &c, int start, int end) {}
+void PmergeMe::mergeInsertionSort(std::deque<int> &c, int start, int end) {
+    (void)c;
+    (void)start;
+    (void)end;
+}
 
 void PmergeMe::sort(void) {
     struct timespec start, end;

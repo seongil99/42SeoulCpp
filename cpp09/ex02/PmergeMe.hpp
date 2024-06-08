@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:27:21 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/05/04 15:32:46 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:44:07 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ class PmergeMe {
     std::vector<int> _before;
     std::deque<int> _dq;
     std::vector<int> _vec;
+    std::vector<int> _jacobstal;
     void _addNumber(int n);
     bool _is_integer(const char *str);
+    void mergeInsertionSort(std::vector<int> &vec, int start, int end);
+    void mergeInsertionSort(std::deque<int> &dq, int start, int end);
+    void initJacobstal(int size);
 
   public:
     PmergeMe(void);
@@ -35,8 +39,6 @@ class PmergeMe {
     PmergeMe &operator=(const PmergeMe &other);
 
     void addNumber(int ac, char *av[]);
-    void mergeInsertionSort(std::vector<int> &vec, int start, int end);
-    void mergeInsertionSort(std::deque<int> &dq, int start, int end);
     void sort(void);
     void print(void);
 

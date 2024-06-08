@@ -6,7 +6,7 @@
 /*   By: seonyoon <seonyoon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 18:10:57 by seonyoon          #+#    #+#             */
-/*   Updated: 2024/04/26 16:13:34 by seonyoon         ###   ########.fr       */
+/*   Updated: 2024/06/03 16:59:17 by seonyoon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ class RPN {
     void calculate(void);
     int getResult(void);
 
-    class BadInputError : public std::exception {
+    class BadInputException : public std::exception {
       public:
         virtual const char *what() const throw();
     };
 
-    class DivisionByZero : public std::exception {
+    class DivisionByZeroException : public std::exception {
       public:
         virtual const char *what() const throw();
     };
