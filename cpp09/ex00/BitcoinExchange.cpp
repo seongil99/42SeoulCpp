@@ -134,8 +134,12 @@ void BitcoinExchange::readDB(void) {
 }
 
 void BitcoinExchange::run(const char *filename) {
-    this->readDB();
-    this->processInputFile(filename);
+    try {
+        readDB();
+        processInputFile(filename);
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 }
 
 const char *BitcoinExchange::NegativeNumberException::what() const throw() {
