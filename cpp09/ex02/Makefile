@@ -33,3 +33,6 @@ re: fclean
 	make all
 
 .PHONY: all bonus clean fclean re
+
+test: $(NAME)
+	./$(NAME) $(shell jot -r 3000 1 1000 | tr '\n' ' ')

@@ -13,6 +13,7 @@
 #include "PmergeMe.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <limits>
@@ -76,54 +77,263 @@ void PmergeMe::print(void) {
               << " elements with std::vector : " << _t_vec << " us"
               << std::endl;
     std::cout << "Time to process a range of " << _dq.size()
-              << " elements with std::deque : " << _t_deq << " us" << std::endl;
+              << " elements with std::deque  : " << _t_deq << " us" << std::endl;
+    std::cout << "Time to process a range of " << _lst.size()
+                << " elements with std::list   : " << _t_lst << " us" << std::endl;
+    std::cout << "Is sorted of std::vector<int>: " << (isSorted(_vec) ? "Yes" : "No") << std::endl;
+    std::cout << "Is sorted of std::deque<int> : " << (isSorted(_dq) ? "Yes" : "No") << std::endl;
+    std::cout << "Is sorted of std::list<int>  : " << (isSorted(_lst) ? "Yes" : "No") << std::endl;
 }
 
-void merInsSort(std::vector<int> &c) {
-    int chain_size = c.size() / 2;
-    for (int i = 0; i < chain_size; i++)
-        ;
+int PmergeMe::findSmall(std::vector<std::pair<int, int> > &pair, int large) {
+    for (unsigned int i = 0; i < pair.size(); i++) {
+        if (pair[i].first == large)
+            return pair[i].second;
+    }
+    return -1;
 }
 
-void PmergeMe::mergeInsertionSort(std::vector<int> &c, int start, int end) {
-    if (start >= end)
-        return;
-    int mid = (start + end) / 2;
-    mergeInsertionSort(c, start, mid);
-    mergeInsertionSort(c, mid + 1, end);
-    for (int i = start; i <= end; i++)
-        std::cout << c[i] << ' ';
-    std::cout << std::endl;
-    std::vector<int> temp;
+int PmergeMe::findSmall(std::deque<std::pair<int, int> > &pair, int large) {
+    for (unsigned int i = 0; i < pair.size(); i++) {
+        if (pair[i].first == large)
+            return pair[i].second;
+    }
+    return -1;
 }
 
-void PmergeMe::mergeInsertionSort(std::deque<int> &c, int start, int end) {
-    (void)c;
-    (void)start;
-    (void)end;
+int PmergeMe::findSmall(std::list<std::pair<int, int> > &pair, int large) {
+    for (std::list<std::pair<int, int> >::iterator it = pair.begin(); it != pair.end(); it++) {
+        if (it->first == large)
+            return it->second;
+    }
+    return -1;
+}
+
+std::vector<int> PmergeMe::getPair(std::vector<int> &large,
+                          std::vector<std::pair<int, int> > &pair) {
+    std::vector<int> small;
+    for (unsigned int i = 0; i < large.size(); i++) {
+        small.push_back(findSmall(pair, large[i]));
+    }
+    if (large.size() % 2 == 1)
+        small.push_back(pair[pair.size() - 1].second);
+    return small;
+}
+
+std::deque<int> PmergeMe::getPair(std::deque<int> &large,
+                        std::deque<std::pair<int, int> > &pair) {
+    std::deque<int> small;
+    for (unsigned int i = 0; i < large.size(); i++) {
+        small.push_back(findSmall(pair, large[i]));
+    }
+    if (large.size() % 2 == 1)
+        small.push_back(pair[pair.size() - 1].second);
+    return small;
+}
+
+std::list<int> PmergeMe::getPair(std::list<int> &large,
+                       std::list<std::pair<int, int> > &pair) {
+    std::list<int> small;
+    std::list<int>::iterator it = large.begin();
+    for (unsigned int i = 0; i < large.size(); i++) {
+        small.push_back(findSmall(pair, *it));
+        it++;
+    }
+    if (large.size() % 2 == 1)
+        small.push_back(pair.back().second);
+    return small;
+}
+
+std::vector<int> PmergeMe::insertMerge(std::vector<int> &result,
+                                       std::vector<std::pair<int, int> > &pair) {
+    std::vector<int> large(result);
+    std::vector<int> small = getPair(large, pair);
+
+    result.insert(result.begin(), small[0]);
+
+    int jacob_prev = 1;
+    int jacob_now = 3;
+    int jacob_next = jacob_prev * 2 + jacob_now;
+    int idx = std::min(jacob_now, static_cast<int>(large.size()));
+    for (unsigned int i = 1; i < large.size(); i++) {
+        if (idx == jacob_prev) {
+            jacob_next = jacob_prev * 2 + jacob_now;
+            jacob_prev = jacob_now;
+            jacob_now = jacob_next;
+            idx = std::min(jacob_now, static_cast<int>(large.size()));
+        }
+        std::vector<int>::iterator find_idx_it = std::find(result.begin(), result.end(), large[idx - 1]);
+        std::vector<int>::iterator insert_idx_it = std::lower_bound(result.begin(), find_idx_it, small[idx - 1]);
+        result.insert(insert_idx_it, small[idx - 1]);
+        --idx;
+    }
+    if (large.size() % 2 == 1) {
+        std::vector<int>::iterator insert_idx_it = std::lower_bound(result.begin(), result.end(), small[small.size() - 1]);
+        result.insert(insert_idx_it, small[small.size() - 1]);
+    }
+    return result;
+}
+
+std::deque<int> PmergeMe::insertMerge(std::deque<int> &result,
+                                      std::deque<std::pair<int, int> > &pair) {
+    std::deque<int> large(result);
+    std::deque<int> small = getPair(large, pair);
+
+    result.push_front(small[0]);
+
+    int jacob_prev = 1;
+    int jacob_now = 3;
+    int jacob_next = jacob_prev * 2 + jacob_now;
+    int idx = std::min(jacob_now, static_cast<int>(large.size()));
+    for (unsigned int i = 1; i < large.size(); i++) {
+        if (idx == jacob_prev) {
+            jacob_next = jacob_prev * 2 + jacob_now;
+            jacob_prev = jacob_now;
+            jacob_now = jacob_next;
+            idx = std::min(jacob_now, static_cast<int>(large.size()));
+        }
+        std::deque<int>::iterator find_idx_it = std::find(result.begin(), result.end(), large[idx - 1]);
+        std::deque<int>::iterator insert_idx_it = std::lower_bound(result.begin(), find_idx_it, small[idx - 1]);
+        result.insert(insert_idx_it, small[idx - 1]);
+        --idx;
+    }
+    if (large.size() % 2 == 1) {
+        std::deque<int>::iterator insert_idx_it = std::lower_bound(result.begin(), result.end(), small[small.size() - 1]);
+        result.insert(insert_idx_it, small[small.size() - 1]);
+    }
+    return result;
+}
+
+std::list<int> PmergeMe::insertMerge(std::list<int> &result,
+                                     std::list<std::pair<int, int> > &pair) {
+    std::list<int> large(result);
+    std::list<int> small = getPair(large, pair);
+
+    result.push_front(small.front());
+
+    int jacob_prev = 1;
+    int jacob_now = 3;
+    int jacob_next = jacob_prev * 2 + jacob_now;
+    int idx = std::min(jacob_now, static_cast<int>(large.size()));
+    for (unsigned int i = 1; i < large.size(); i++) {
+        if (idx == jacob_prev) {
+            jacob_next = jacob_prev * 2 + jacob_now;
+            jacob_prev = jacob_now;
+            jacob_now = jacob_next;
+            idx = std::min(jacob_now, static_cast<int>(large.size()));
+        }
+        std::list<int>::iterator large_idx_it = large.begin();
+        std::advance(large_idx_it, idx - 1);
+        std::list<int>::iterator find_idx_it = std::find(result.begin(), result.end(), *large_idx_it);
+        std::list<int>::iterator small_idx_it = small.begin();
+        std::advance(small_idx_it, idx - 1);
+        std::list<int>::iterator insert_idx_it = std::lower_bound(result.begin(), find_idx_it, *small_idx_it);
+        result.insert(insert_idx_it, *small_idx_it);
+        --idx;
+    }
+    if (large.size() % 2 == 1) {
+        std::list<int>::iterator insert_idx_it = std::lower_bound(result.begin(), result.end(), small.back());
+        result.insert(insert_idx_it, small.back());
+    }
+    return result;
+}
+
+std::vector<int> PmergeMe::fordJohnsonSort(std::vector<int> &c) {
+    if (c.size() <= 1)
+        return c;
+    std::vector<int> large;
+    std::vector<std::pair<int, int> > pair;
+    for (unsigned int i = 0; i < c.size() - 1; i += 2) {
+        if (c[i] > c[i + 1]) {
+            large.push_back(c[i]);
+            pair.push_back(std::make_pair(c[i], c[i + 1]));
+        } else {
+            large.push_back(c[i + 1]);
+            pair.push_back(std::make_pair(c[i + 1], c[i]));
+        }
+    }
+    if (c.size() % 2 == 1)
+        pair.push_back(std::make_pair(c[c.size() - 1], c[c.size() - 1]));
+    std::vector<int> result = fordJohnsonSort(large);
+    insertMerge(result, pair);
+    return result;
+}
+
+std::deque<int> PmergeMe::fordJohnsonSort(std::deque<int> &c) {
+    if (c.size() <= 1)
+        return c;
+    std::deque<int> large;
+    std::deque<std::pair<int, int> > pair;
+    for (unsigned int i = 0; i < c.size() - 1; i += 2) {
+        if (c[i] > c[i + 1]) {
+            large.push_back(c[i]);
+            pair.push_back(std::make_pair(c[i], c[i + 1]));
+        } else {
+            large.push_back(c[i + 1]);
+            pair.push_back(std::make_pair(c[i + 1], c[i]));
+        }
+    }
+    if (c.size() % 2 == 1)
+        pair.push_back(std::make_pair(c[c.size() - 1], c[c.size() - 1]));
+    std::deque<int> result = fordJohnsonSort(large);
+    insertMerge(result, pair);
+    return result;
+}
+
+std::list<int> PmergeMe::fordJohnsonSort(std::list<int> &c) {
+    if (c.size() <= 1)
+        return c;
+    std::list<int> large;
+    std::list<std::pair<int, int> > pair;
+    std::list<int>::iterator it = c.begin();
+    for (unsigned int i = 0; i < c.size() - 1; i += 2) {
+        if (*it > *(++it)) {
+            large.push_back(*it);
+            pair.push_back(std::make_pair(*it, *(it--)));
+        } else {
+            large.push_back(*it);
+            pair.push_back(std::make_pair(*it, *(it--)));
+        }
+    }
+    if (c.size() % 2 == 1)
+        pair.push_back(std::make_pair(c.back(), c.back()));
+    std::list<int> result = fordJohnsonSort(large);
+    insertMerge(result, pair);
+    return result;
 }
 
 void PmergeMe::sort(void) {
     struct timespec start, end;
 
+    _vec = std::vector<int>(_before.begin(), _before.end());
     clock_gettime(CLOCK_REALTIME, &start);
-    for (unsigned int i = 0; i < _before.size(); i++) {
-        _vec.push_back(_before[i]);
-    }
-    mergeInsertionSort(_vec, 0, _vec.size() - 1);
+    _vec = fordJohnsonSort(_vec);
     clock_gettime(CLOCK_REALTIME, &end);
     _t_vec = (end.tv_sec - start.tv_sec) * 1000000 +
              (end.tv_nsec - start.tv_nsec) / 1000;
 
+    _dq = std::deque<int>(_before.begin(), _before.end());
     clock_gettime(CLOCK_REALTIME, &start);
-    for (unsigned int i = 0; i < _before.size(); i++) {
-        _dq.push_back(_before[i]);
-    }
-    mergeInsertionSort(_dq, 0, _dq.size() - 1);
+    _dq = fordJohnsonSort(_dq);
     clock_gettime(CLOCK_REALTIME, &end);
     _t_deq = (end.tv_sec - start.tv_sec) * 1000000 +
              (end.tv_nsec - start.tv_nsec) / 1000;
+
+    _lst = std::list<int>(_before.begin(), _before.end());
+    clock_gettime(CLOCK_REALTIME, &start);
+    _lst = fordJohnsonSort(_lst);
+    clock_gettime(CLOCK_REALTIME, &end);
+    _t_lst = (end.tv_sec - start.tv_sec) * 1000000 +
+             (end.tv_nsec - start.tv_nsec) / 1000;
 }
+
+// void PmergeMe::initJacobstal(int size) {
+//     _jacobsthal.push_back(0);
+//     _jacobsthal.push_back(1);
+//     for (int i = 2; i < size; i++) {
+//         _jacobsthal.push_back(_jacobsthal[i - 1] + 2 * _jacobsthal[i - 2]);
+//     }
+// }
 
 const char *PmergeMe::BadInputException::what() const throw() {
     return "Bad Input";
